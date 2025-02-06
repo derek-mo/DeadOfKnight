@@ -1,0 +1,4 @@
+[SPEAKERSPRITE=]Oh man there's no sprite right now or name!
+[NAME=The Professor]Why hello there! Now i have a name!
+[NAME=Chibi][SPEAKERSPRITE=Chibi]This is a test script to make sure your dialogue is working!
+[NAME=Knight][SPEAKERSPRITE=Knight]You can even change text !

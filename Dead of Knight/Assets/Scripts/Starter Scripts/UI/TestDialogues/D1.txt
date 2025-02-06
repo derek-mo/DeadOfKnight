@@ -1,0 +1,9 @@
+[NAME=???][SPEAKERSPRITE=Knight] Well, well, look who it is.
+[NAME=You][SPEAKERSPRITE=] Who are you!?
+You don't have a name.
+[NAME=???][SPEAKERSPRITE=Knight]  Tis I! Sir Erik of the Knights!
+[NAME=Sir Erik] No time for chit-of-chat, you must go collect the donuts!
+[NAME=You][SPEAKERSPRITE=] ...why?
+[NAME=Sir Erik][SPEAKERSPRITE=Knight] Because you gotta get collectibles to escape the level!
+[NAME=You][SPEAKERSPRITE=] But why donuts?
+[NAME=Sir Erik][SPEAKERSPRITE=Knight] I dunno, ask the Professor.
