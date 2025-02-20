@@ -14,7 +14,7 @@ public class EnemyPatrolPathBehaviour : StateMachineBehaviour
     private GameObject thisObject;
     private int i;
     private Animator anim;
-    private bool SpriteFacingRight = false;
+    //private bool SpriteFacingRight = false;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

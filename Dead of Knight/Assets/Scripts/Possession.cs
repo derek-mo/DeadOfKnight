@@ -28,12 +28,14 @@ public class Possession : MonoBehaviour
         {
             foreach (GameObject possessObject in possessables)
             {
+                Debug.Log(possessObject.name);
                 if ((transform.position - possessObject.transform.position).magnitude <= 2)
                 {
                     spriteRenderer.enabled = false;
                     Debug.Log("Possessing");
                     possessObject.tag = "Player";
                     possessObject.GetComponent<Possessable>().enabled = true;
+                    possessObject.GetComponent<PlayerMovement>().enabled = true;
                     return;
                 }
             }
