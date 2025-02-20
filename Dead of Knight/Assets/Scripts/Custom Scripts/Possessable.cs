@@ -11,35 +11,35 @@ public class Possessable : MonoBehaviour
     public void Start()
     {
         //Object Names will be the names of objects we can possess
-        if (gameObject.name == "Triangle")
+        if (gameObject.name == "dummy")
         {
-            GetComponent<Triangle>().enabled = true;
+            GetComponent<PlayerMovement>().enabled = false;
         }
-        else if (gameObject.name == "Square")
-        {
-            GetComponent<Square>().enabled = true;
-        }
+        // else if (gameObject.name == "Square")
+        // {
+        //     GetComponent<Square>().enabled = true;
+        // }
     }
 
     // Update is called once per frame
     public void Update()
     {
-        move();
+        //move();
 
         exorcize();
     }
 
     //Not all Possessable objects will have move(). This is for demo purposes
-    public void move()
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+    // public void move()
+    // {
+    //     float h = Input.GetAxis("Horizontal");
+    //     float v = Input.GetAxis("Vertical");
 
-        Vector3 tempVect = new Vector3(h, v, 0);
-        tempVect = tempVect.normalized * speed * Time.deltaTime;
+    //     Vector3 tempVect = new Vector3(h, v, 0);
+    //     tempVect = tempVect.normalized * speed * Time.deltaTime;
 
-        transform.position += tempVect;
-    }
+    //     transform.position += tempVect;
+    // }
 
     //All possable objects will have exorcize()
     public void exorcize()
@@ -50,14 +50,17 @@ public class Possessable : MonoBehaviour
             GetComponent<Possessable>().enabled = false;
             GameObject ghost = GameObject.FindGameObjectWithTag("Player");
             ghost.GetComponent<SpriteRenderer>().enabled = true;
-            if (gameObject.name == "Triangle")
-            {
-                gameObject.GetComponent<Triangle>().enabled = false;
+            if (gameObject.name == "dummy") {
+                gameObject.GetComponent<PlayerMovement>().enabled = false;
             }
-            if (gameObject.name == "Square")
-            {
-                gameObject.GetComponent<Square>().enabled = false;
-            }
+            // if (gameObject.name == "Triangle")
+            // {
+            //     gameObject.GetComponent<Triangle>().enabled = false;
+            // }
+            // if (gameObject.name == "Square")
+            // {
+            //     gameObject.GetComponent<Square>().enabled = false;
+            // }
         }
         
     }
