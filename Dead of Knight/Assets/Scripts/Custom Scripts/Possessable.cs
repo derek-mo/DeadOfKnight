@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class Possessable : MonoBehaviour
 {
-    public float speed = 10;
-
+    public Sprite newSprite; // Assign the new sprite in the Inspector
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
-    public void Start()
-    {
+    public void Start() {
         //Object Names will be the names of objects we can possess
-        if (gameObject.name == "dummy")
-        {
-            GetComponent<PlayerMovement>().enabled = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (newSprite != null) {
+            spriteRenderer.sprite = newSprite;
         }
         // else if (gameObject.name == "Square")
         // {
@@ -22,48 +21,59 @@ public class Possessable : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update()
-    {
-        //move();
-
+    public void Update() {
         exorcize();
     }
 
-    //Not all Possessable objects will have move(). This is for demo purposes
-    // public void move()
-    // {
-    //     float h = Input.GetAxis("Horizontal");
-    //     float v = Input.GetAxis("Vertical");
-
-    //     Vector3 tempVect = new Vector3(h, v, 0);
-    //     tempVect = tempVect.normalized * speed * Time.deltaTime;
-
-    //     transform.position += tempVect;
-    // }
+    //Not all Possessable objects will have move(). This is for demo purpose
 
     //All possable objects will have exorcize()
-    public void exorcize()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
+    // public void exorcize()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.O))
+    //     {
+    //         this.tag = "Possessable";
+    //         GetComponent<Possessable>().enabled = false;
+    //         GameObject ghost = GameObject.FindGameObjectWithTag("Player");
+    //         ghost.GetComponent<SpriteRenderer>().enabled = true;
+    //         if (gameObject.name == "dummy") {
+    //             canMove = false;
+    //             gameObject.GetComponent<PlayerMovement>().enabled = false;
+    //         }
+    //         // if (gameObject.name == "Triangle")
+    //         // {
+    //         //     gameObject.GetComponent<Triangle>().enabled = false;
+    //         // }
+    //         // if (gameObject.name == "Square")
+    //         // {
+    //         //     gameObject.GetComponent<Square>().enabled = false;
+    //         // }
+    //     }
+        
+    // }
+    public void exorcize() {
+        if (Input.GetKeyDown(KeyCode.O)) {
+            GameObject ghost = GameObject.Find("Ghost"); // Make sure the ghost is named "Ghost" in Unity
+
+            if (ghost != null) {
+                ghost.GetComponent<SpriteRenderer>().enabled = true;
+                ghost.GetComponent<Possession>().currentBody = ghost; // Return control to the ghost
+
+                // **Update Camera Target to Follow Ghost Again**
+                CameraMovement camScript = Camera.main.GetComponent<CameraMovement>();
+                if (camScript != null) {
+                    camScript.PlayerCharacter = ghost.transform;
+                }
+            }
+
+            // Reset the possessed object
             this.tag = "Possessable";
             GetComponent<Possessable>().enabled = false;
-            GameObject ghost = GameObject.FindGameObjectWithTag("Player");
-            ghost.GetComponent<SpriteRenderer>().enabled = true;
-            if (gameObject.name == "dummy") {
-                gameObject.GetComponent<PlayerMovement>().enabled = false;
-            }
-            // if (gameObject.name == "Triangle")
-            // {
-            //     gameObject.GetComponent<Triangle>().enabled = false;
-            // }
-            // if (gameObject.name == "Square")
-            // {
-            //     gameObject.GetComponent<Square>().enabled = false;
-            // }
+            GetComponent<PlayerMovement>().enabled = false;
         }
-        
     }
+
+
 }
 */
 
