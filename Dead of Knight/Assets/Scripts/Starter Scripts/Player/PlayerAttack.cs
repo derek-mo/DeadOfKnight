@@ -4,121 +4,127 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-	[Header("References")]
+    [Header("References")]
+    [Tooltip("If true, uses the player’s own attack animation (the same Animator as your player).")]
+    public bool UsePlayerAttackAnimations = true;
 
-	[Tooltip("There are separate animators for the weapon. If you have a player attack animation from a sprite sheet, make this true. If your attack animation is the weapon itself moving (separate from the player) this can be false.")]
-	public bool UsePlayerAttackAnimations = false;
-	public Animator anim;
-	public Rigidbody2D rb;
-	public PlayerMovement playerMoveScript;
+    [Tooltip("This is the player's animator (usually the same one in your PlayerMovement script).")]
+    public Animator anim;
 
-	[Header("Player Weapons")]
-	[Tooltip("This is the list of all the weapons that your player uses")]
-	public List<Damager> weaponList;
-	[Tooltip("This is the current weapon that the player is using")]
-	public Damager weapon;
-	[Tooltip("The coolDown before you can attack again")]
-	public float coolDown = 0.4f;
+    public Rigidbody2D rb;
+    public PlayerMovement playerMoveScript;
 
-	[Header("Audio")]
-	public PlayerAudio playerAudio;
+    [Header("Player Weapons")]
+    [Tooltip("List of all weapons the player can use.")]
+    public List<Damager> weaponList;
 
-	private bool canAttack = true;
+    [Tooltip("The current weapon the player is using.")]
+    public Damager weapon;
 
+    [Tooltip("Cooldown time before next attack.")]
+    public float coolDown = 0.4f;
 
-	private void Start()
-	{
-		anim = GetComponent<Animator>();
-		rb = GetComponent<Rigidbody2D>();
-		playerMoveScript = GetComponent<PlayerMovement>();
-		playerAudio = GetComponent<PlayerAudio>();
-		if (weapon == null && weaponList.Count > 0)
-		{
-			weapon = weaponList[0];
-		}
-		// switchWeaponAtIndex(0);
-	}
+    [Header("Audio")]
+    public PlayerAudio playerAudio;
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Alpha1))//Here is where you can hit the "1" key on your keyboard to activate this weapon
-		{
-			if (weaponList.Count > 0)
-			{
-				switchWeaponAtIndex(0);
-			}
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))//Remove this if you don't have multiple weapons
-		{
-			if (weaponList.Count > 1)
-			{
-				switchWeaponAtIndex(1);
-			}
-		}
+    private bool canAttack = true;
 
-		if (Input.GetKey(KeyCode.Mouse0))
-		{
-			Attack();
-			if (playerAudio && !playerAudio.AttackSource.isPlaying && playerAudio.AttackSource.clip != null)
-			{
-				playerAudio.AttackSource.Play();
-			}
-		}
-		else
-		{
-			StopAttack();
-		}
-	}
+    private void Start()
+    {
+        // This is the player's own animator, presumably on the same object
+        anim = GetComponent<Animator>();
 
-	public void Attack()
-	{
-		//This is where the weapon is rotated in the right direction that you are facing
-		if (weapon && canAttack)
-		{
-			if (UsePlayerAttackAnimations)
+        rb = GetComponent<Rigidbody2D>();
+        playerMoveScript = GetComponent<PlayerMovement>();
+        playerAudio = GetComponent<PlayerAudio>();
+
+        // If no weapon is assigned, grab the first from the list
+        if (weapon == null && weaponList.Count > 0)
+        {
+            weapon = weaponList[0];
+        }
+    }
+
+    private void Update()
+{
+    // Example weapon switching logic
+    if (Input.GetKeyDown(KeyCode.Alpha1))
+    {
+        if (weaponList.Count > 0) switchWeaponAtIndex(0);
+    }
+    else if (Input.GetKeyDown(KeyCode.Alpha2))
+    {
+        if (weaponList.Count > 1) switchWeaponAtIndex(1);
+    }
+
+    // Attack only on the frame the user presses Left Click
+    if (Input.GetKeyDown(KeyCode.Mouse0))
+    {
+        Attack();
+
+        // Play an attack sound if assigned
+        if (playerAudio && !playerAudio.AttackSource.isPlaying && playerAudio.AttackSource.clip != null)
+        {
+            playerAudio.AttackSource.Play();
+        }
+    }
+    // Stop the attack when the user releases the mouse button
+    else if (Input.GetKeyUp(KeyCode.Mouse0))
+    {
+        StopAttack();
+    }
+}
+
+    public void Attack()
+    {
+        // Only attack if we have a weapon and are not on cooldown
+        if (weapon && canAttack)
+        {
+            StartCoroutine(CoolDown());
+
+            // Because we want the player's animator controlling the sword:
+            // If UsePlayerAttackAnimations == true, call the player’s "isAttacking" trigger
+            if (UsePlayerAttackAnimations && playerMoveScript != null)
             {
-				Debug.Log("using player attack animation");
-				playerMoveScript.TriggerPlayerAttackAnimation();
+                playerMoveScript.TriggerPlayerAttackAnimation();
+            }
 
-			}
+            // Start the weapon logic (collider damage, etc.)
+            if (weapon is ProjectileWeapon projectile)
+            {
+                projectile.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection(), rb.velocity);
+            }
+            else
+            {
+                weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection());
+            }
+        }
+    }
 
-			if (weapon is ProjectileWeapon)
-				weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection(), rb.velocity);
-			else
-				weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection());
+    public void StopAttack()
+    {
+        // Stop the weapon’s damage
+        if (weapon)
+        {
+            weapon.WeaponFinished();
+        }
+    }
 
-			StartCoroutine(CoolDown());
-		}
-	}
+    public void switchWeaponAtIndex(int index)
+    {
+        if (index < weaponList.Count && weaponList[index] != null)
+        {
+            if (weapon) weapon.gameObject.SetActive(false);
 
-	public void StopAttack()
-	{
-		if (weapon)
-		{
-			weapon.WeaponFinished();
-		}
-	}
+            weapon = weaponList[index];
+            weapon.gameObject.SetActive(true);
+        }
+    }
 
-	public void switchWeaponAtIndex(int index)
-	{
-		//Makes sure that if the index exists, then a switch will occur
-		if (index < weaponList.Count && weaponList[index])
-		{
-			//Deactivate current weapon
-			weapon.gameObject.SetActive(false);
-
-			//Switch weapon to index then activate
-			weapon = weaponList[index];
-			weapon.gameObject.SetActive(true);
-		}
-
-	}
-
-	private IEnumerator CoolDown()
-	{
-		canAttack = false;
-		yield return new WaitForSeconds(coolDown);
-		canAttack = true;
-	}
+    private IEnumerator CoolDown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(coolDown);
+        canAttack = true;
+    }
 }
