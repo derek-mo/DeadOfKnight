@@ -25873,10 +25873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e39f99dcd999946aaca275cc363bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UsePlayerAttackAnimations: 0
-  anim: {fileID: 0}
+  UsePlayerAttackAnimations: 1
+  anim: {fileID: 8014127488377754}
   rb: {fileID: 0}
-  playerMoveScript: {fileID: 0}
+  playerMoveScript: {fileID: 8500843766963900811}
   weaponList: []
   weapon: {fileID: 561204915}
   coolDown: 0.4
