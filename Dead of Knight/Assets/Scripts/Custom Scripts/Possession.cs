@@ -92,7 +92,7 @@ public class Possession : MonoBehaviour
 
     private void Possess()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.75f);
         foreach (var collider in colliders)
         {
             if (collider.CompareTag("Possessable"))
@@ -165,7 +165,7 @@ public class Possession : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1f);  // Change 1f to match your OverlapCircle radius
+        Gizmos.DrawWireSphere(transform.position, 0.75f);  // Change 1f to match your OverlapCircle radius
     }
 
 }
