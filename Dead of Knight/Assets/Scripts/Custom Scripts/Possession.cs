@@ -87,7 +87,9 @@ public class Possession : MonoBehaviour
 
     private void updatePosition()
     {
-        transform.position = possessedObject.transform.position;
+        // Update the ghost's position to match the possessed object
+        if (possessedObject)
+            ghost.position = possessedObject.transform.position;
     }
 
     private void Possess()
