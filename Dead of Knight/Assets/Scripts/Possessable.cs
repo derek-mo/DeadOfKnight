@@ -1,44 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Possessable : MonoBehaviour
 {
-    public float speed = 10;
-
+    //public float speed = 10;
     // Start is called before the first frame update
     public void Start()
     {
         //Object Names will be the names of objects we can possess
-        if (gameObject.name == "Triangle")
+        if (gameObject.name == "Ballista")
         {
-            GetComponent<Triangle>().enabled = true;
+            GetComponent<Ballista>().enabled = true;
         }
-        else if (gameObject.name == "Square")
+        else if (gameObject.name == "armor_np")
         {
-            GetComponent<Square>().enabled = true;
+            GetComponent<PlayerMovement>().enabled = true;
         }
     }
 
     // Update is called once per frame
     public void Update()
     {
-        move();
+        //move();
 
         exorcize();
     }
 
     //Not all Possessable objects will have move(). This is for demo purposes
-    public void move()
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+    //public void move()
+    //{
+    //    float h = Input.GetAxis("Horizontal");
+    //    float v = Input.GetAxis("Vertical");
 
-        Vector3 tempVect = new Vector3(h, v, 0);
-        tempVect = tempVect.normalized * speed * Time.deltaTime;
+    //    Vector3 tempVect = new Vector3(h, v, 0);
+    //    tempVect = tempVect.normalized * speed * Time.deltaTime;
 
-        transform.position += tempVect;
-    }
+    //    transform.position += tempVect;
+    //}
 
     //All possable objects will have exorcize()
     public void exorcize()
@@ -51,11 +51,11 @@ public class Possessable : MonoBehaviour
             ghost.GetComponent<SpriteRenderer>().enabled = true;
             if (gameObject.name == "Triangle")
             {
-                gameObject.GetComponent<Triangle>().enabled = false;
+                gameObject.GetComponent<Ballista>().enabled = false;
             }
-            if (gameObject.name == "Square")
+            if (gameObject.name == "armor_np")
             {
-                gameObject.GetComponent<Square>().enabled = false;
+                gameObject.GetComponent<PlayerMovement>().enabled = false;
             }
         }
         
