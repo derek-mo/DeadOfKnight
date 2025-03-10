@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bolt : MonoBehaviour
 {
     Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class Bolt : MonoBehaviour
             else 
                 rb.AddForce(transform.right * -10, ForceMode2D.Impulse);
         }
-        if (collision.gameObject.name == "target")
+        if (collision.gameObject.name == "Target")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);

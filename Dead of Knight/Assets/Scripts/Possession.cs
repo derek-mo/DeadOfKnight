@@ -10,6 +10,7 @@ public class Possession : MonoBehaviour
     GameObject[] possessables; 
     SpriteRenderer spriteRenderer;
     public GameObject popup;
+
     // Start is called before the first frame update
     void Start()
     {

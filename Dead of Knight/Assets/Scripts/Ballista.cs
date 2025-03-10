@@ -8,6 +8,7 @@ public class Ballista : MonoBehaviour
     public int BallistaType;
     //1 for up, 2 for right, 3 for down, 4 for left
     // Start is called before the first frame update
+
     void Start()
     {
 
