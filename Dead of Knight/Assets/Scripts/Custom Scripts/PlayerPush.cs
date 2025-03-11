@@ -1,3 +1,4 @@
+/*
 // using UnityEngine;
 // using System.Collections;
 // using Unity.VisualScripting;
@@ -5,9 +6,9 @@
 // public class PlayerPush : MonoBehaviour {
 
 // 		public float distance=1f;
-// 		public LayerMask boxMask;
+// 		public LayerMask objMask;
 
-// 		GameObject box;
+// 		gameObject obj;
 // 	// Use this for initialization
 // 	void Start () {
 	
@@ -19,29 +20,29 @@
 //         Physics2D.queriesStartInColliders = false;
 
 //         // Cast Raycasts in all 4 directions
-//         RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, distance, boxMask);
-//         RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, distance, boxMask);
-//         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, distance, boxMask);
-//         RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, distance, boxMask);
+//         RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, distance, objMask);
+//         RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, distance, objMask);
+//         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, distance, objMask);
+//         RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, distance, objMask);
 
-//         // Variable to store the hit pushable object
-//         GameObject pushableBox = null;
+//         // Variable to store the hit pushable obj
+//         gameObject pushableobj = null;
 
-//         // Check each direction for a pushable object
+//         // Check each direction for a pushable obj
 //         if (hitUp.collider != null && hitUp.collider.gameObject.CompareTag("Pushable"))
-//             pushableBox = hitUp.collider.gameObject;
+//             pushableobj = hitUp.collider.gameObject;
 //         else if (hitDown.collider != null && hitDown.collider.gameObject.CompareTag("Pushable"))
-//             pushableBox = hitDown.collider.gameObject;
+//             pushableobj = hitDown.collider.gameObject;
 //         else if (hitLeft.collider != null && hitLeft.collider.gameObject.CompareTag("Pushable"))
-//             pushableBox = hitLeft.collider.gameObject;
+//             pushableobj = hitLeft.collider.gameObject;
 //         else if (hitRight.collider != null && hitRight.collider.gameObject.CompareTag("Pushable"))
-//             pushableBox = hitRight.collider.gameObject;
+//             pushableobj = hitRight.collider.gameObject;
 
-//         // If a pushable object is detected and LeftShift is pressed
-//         if (pushableBox != null && Input.GetKeyDown(KeyCode.LeftShift))
+//         // If a pushable obj is detected and LeftShift is pressed
+//         if (pushableobj != null && Input.GetKeyDown(KeyCode.LeftShift))
 //         {
-//             box = pushableBox;
-//             FixedJoint2D joint = box.GetComponent<FixedJoint2D>();
+//             obj = pushableobj;
+//             FixedJoint2D joint = obj.GetComponent<FixedJoint2D>();
 
 //             if (joint != null)
 //             {
@@ -49,68 +50,109 @@
 //                 joint.connectedBody = GetComponent<Rigidbody2D>();
 //             }
 //         }
-//         // If LeftShift is released, detach the box
-//         else if (Input.GetKeyUp(KeyCode.LeftShift) && box != null)
+//         // If LeftShift is released, detach the obj
+//         else if (Input.GetKeyUp(KeyCode.LeftShift) && obj != null)
 //         {
-//             box.GetComponent<FixedJoint2D>().enabled = false;
-//             box = null; // Clear the reference
+//             obj.GetComponent<FixedJoint2D>().enabled = false;
+//             obj = null; // Clear the reference
 //         }
 //     }
-
-
-// 		void OnDrawGizmos()
-// 		{
-// 				Gizmos.color = Color.yellow;
-
-// 				Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.up * transform.localScale.x * distance);
-// 				Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.down * transform.localScale.x * distance);
-// 				Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.left * transform.localScale.x * distance);
-// 				Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * distance);
-
-// 		}
 // }
+
+// ONLY HORIZONTAL SCRIPT
 
 using UnityEngine;
 using System.Collections;
 
 public class PlayerPush : MonoBehaviour {
     public float distance=1f;
-    public LayerMask boxMask;
+    public LayerMask objMask;
 
-    GameObject box;
+    gameObject obj;
 
 	// Use this for initialization
-	void Start () {
-        Debug.Log("PlayerPush script started");
-	}
+	void Start () {}
 	
 	// Update is called once per frame
 	void Update () {
         Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.right * transform.localScale.x, distance, boxMask);
+        RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.right * transform.localScale.x, distance, objMask);
+
+        Debug.DrawRay(transform.position, Vector2.right * transform.localScale.x * distance, Color.red);
+        Debug.Log("Raycast hit: " + (hit.collider != null ? hit.collider.gameObject.name : "Nothing"));
+
 
         //Debug.Log(hit.collider != null && hit.collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.LeftShift));    
 
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.LeftShift)) {
-            Debug.Log("Hit");
-            box = hit.collider.gameObject;
-            Debug.Log ("Box: " + box.gameObject.name);
+            //Debug.Log("Found Pushable Item: " + hit.collider.gameObject.name);
+            obj = hit.collider.gameObject;
 
-            box.GetComponent<FixedJoint2D> ().enabled = true;
-            box.GetComponent<FixedJoint2D> ().connectedBody = gameObject.GetComponent<Rigidbody2D>();
-            //box.GetComponent<boxpull> ().beingPushed = true;
+            obj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            obj.GetComponent<Rigidbody2D>().freezeRotation = true;
+            obj.GetComponent<FixedJoint2D> ().enabled = true;
+            obj.GetComponent<FixedJoint2D> ().connectedBody = gameObject.GetComponent<Rigidbody2D>();
+            //obj.GetComponent<objpull> ().beingPushed = true;
+
+        } else if (Input.GetKeyUp(KeyCode.LeftShift) && obj != null) {
+            obj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            obj.GetComponent<FixedJoint2D> ().enabled = false;
+            //obj.GetComponent<objpull> ().beingPushed = false;
+        }
+		
+	}
+}
+*/
+
+using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
+
+public class PlayerPush : MonoBehaviour {
+    public float rayDistance = 1f;
+    public LayerMask objMask;
+    public Transform pushPoint;
+    public Transform raycastPoint;
+
+    private GameObject obj;
+
+	// Use this for initialization
+	void Start () {}
+	
+	// Update is called once per frame
+	void Update () {
+        Physics2D.queriesStartInColliders = false;
+        
+        RaycastHit2D hit = Physics2D.Raycast (raycastPoint.position, Vector2.right * transform.localScale.x, rayDistance, objMask);
+
+        //Debug.Log(hit.collider != null && hit.collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.E));    
+
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.LeftShift) && obj == null) {
+            //Debug.Log("Found Pushable Item: " + hit.collider.gameObject.name);
+            obj = hit.collider.gameObject;
+
+            obj.transform.position = pushPoint.position;
+            // obj.GetComponent<FixedJoint2D> ().enabled = true;
+            // obj.GetComponent<FixedJoint2D> ().connectedBody = gameObject.GetComponent<Rigidbody2D>();
+            //obj.GetComponent<objpull> ().beingPushed = true;
+            obj.transform.SetParent(transform);
 
         } else if (Input.GetKeyUp(KeyCode.LeftShift)) {
-            box.GetComponent<FixedJoint2D> ().enabled = false;
-            //box.GetComponent<boxpull> ().beingPushed = false;
+            obj.transform.SetParent(null);
+            obj = null;
+            //obj.GetComponent<FixedJoint2D> ().enabled = false;
+            //obj.GetComponent<objpull> ().beingPushed = false;
+        }
+        
+        if (obj != null) {
+            obj.transform.position = pushPoint.position;
         }
 		
 	}
 
-
-    void OnDrawGizmos() {
-        Gizmos.color = Color.yellow;
-
-        Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * distance);
-    }
+    // private void OnDrawGizmos() {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawLine (raycastPoint.position, (Vector2)raycastPoint.position + Vector2.right * transform.localScale.x * rayDistance);
+    // }
 }
+
