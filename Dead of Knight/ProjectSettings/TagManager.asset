@@ -8,6 +8,7 @@ TagManager:
   - Cover
   - Possessable
   - Pushable
+  - Phasable
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - Water
   - UI
   - Pushable
-  - 
-  - 
-  - 
+  - Phasable
+  - Armor
+  - Possessable
   - 
   - 
   - 
