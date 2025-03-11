@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Dead of Knight/Assets/Sprites/UI/quit.png.meta
 guid: 2eb737d485d49d949989c89b16eb95ff
+========
+guid: 995359adb74a553438b656766af6a18a
+>>>>>>>> 9d64cc5f393a924f808d0e209b112d74e79fbe11:Dead of Knight/Assets/Sprites/Package Stuff/Backyard_Campers/Exclamation_Indicator.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +38,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -65,7 +69,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Dead of Knight/Assets/Sprites/UI/options.png.meta
 guid: acd63ac011f5a204fb79cabf9aa68eb0
+========
+guid: fe3a9173103d2ad4483f6eaa86488bae
+>>>>>>>> 9d64cc5f393a924f808d0e209b112d74e79fbe11:Dead of Knight/Assets/Sprites/Team Art/Armor_Possessed_Sprite.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +38,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
