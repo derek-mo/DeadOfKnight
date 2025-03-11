@@ -9,6 +9,7 @@ TagManager:
   - Possessable
   - Pushable
   - Phasable
+  - Armor
   layers:
   - Default
   - TransparentFX

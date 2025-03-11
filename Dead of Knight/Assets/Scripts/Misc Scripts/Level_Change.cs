@@ -13,7 +13,7 @@ public class Level_Change : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //other.name should equal the root of your Player object
-        if (other.tag == "Player")
+        if (other.tag == "Armor")
         {
             //The scene number to load (in File->Build Settings)
             if (useGameSceneManager)

@@ -108,7 +108,7 @@ public class Possession : MonoBehaviour
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
             foreach (var collider in colliders)
             {
-                if (collider.CompareTag("Possessable"))
+                if (collider.CompareTag("Possessable") || collider.CompareTag("Armor"))
                 {
                     target = collider.gameObject;
                     break;

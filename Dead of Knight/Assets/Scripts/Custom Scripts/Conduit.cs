@@ -19,6 +19,10 @@ public class Conduit : MonoBehaviour
                 isPlayerNear = true;
                 break;
             }
+            else
+            {
+                isPlayerNear = false;
+            }
         }
         
         // Check if the player is within interaction distance and presses "E"
