@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
 	private bool levelBool = false;
 	private int levelIndex;
 
-	private bool isInDialouge = false;
+	//private bool isInDialogue = false;
 	private bool isTyping = false;
 	private bool cancelTyping = false;
 
@@ -97,7 +97,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartDialogue(Queue<string> dialogue)
 	{
-		isInDialouge = true;
+		//isInDialogue = true;
 		speaker.sprite = invisSprite; //Clear the speaker
 		DialogueUI.SetActive(true);
 		continueImage.SetActive(false);
@@ -217,7 +217,7 @@ public class DialogueManager : MonoBehaviour
 		inputStream.Clear();
 		DialogueUI.SetActive(false);
 
-		isInDialouge = false;
+		//isInDialogue = false;
 		cancelTyping = false;
 		isTyping = false;
 		// isOpen = false;

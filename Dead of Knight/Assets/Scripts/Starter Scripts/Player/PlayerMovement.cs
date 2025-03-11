@@ -201,6 +201,8 @@ public class PlayerMovement : MonoBehaviour
 		else if (Horizontal != 0 || Vertical != 0)
 		{
 			lastLookDirection = new Vector2(Horizontal, Vertical);
+			anim.SetFloat("xInput", lastLookDirection.x);
+			anim.SetFloat("yInput", lastLookDirection.y);
 		}
 
 		rb.velocity = new Vector3(Horizontal * Speed, Vertical * Speed); //Set velocity to move gameobject.

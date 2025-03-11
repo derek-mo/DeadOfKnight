@@ -1,23 +1,12 @@
-/*
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+/*using UnityEngine;
 
 public class Possession : MonoBehaviour
 {
-    //All objects that can be possessed must have label Possessable
-    GameObject[] possessables; 
-    SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
     void Start()
     {
-        possessables = GameObject.FindGameObjectsWithTag("Possessable");
-        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         possess();
@@ -27,18 +16,173 @@ public class Possession : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            GameObject[] possessables = GameObject.FindGameObjectsWithTag("Possessable");
+
             foreach (GameObject possessObject in possessables)
             {
                 if ((transform.position - possessObject.transform.position).magnitude <= 2)
                 {
-                    spriteRenderer.enabled = false;
-                    Debug.Log("Possessing");
-                    possessObject.tag = "Player";
-                    possessObject.GetComponent<Possessable>().enabled = true;
-                    return;
+                    Debug.Log("Possessing: " + possessObject.name);
+
+                    // // Hide the ghost
+                    // spriteRenderer.enabled = false;
+
+                    // // Transfer control
+                    // currentBody = possessObject;
+                    // currentBody.tag = "Player";
+                    // if (currentBody.name == "dummy") {
+                    //     animator = currentBody.GetComponent<Animator>();
+                    //     animator.SetTrigger("Possessing");
+                    // }
+
+                    // if (newSprite != null) {
+                    //     spriteRenderer = currentBody.GetComponent<SpriteRenderer>();
+                    //     spriteRenderer.sprite = newSprite;
+                    // }   
+                    // currentBody.GetComponent<Possessable>().enabled = true;
+                    // currentBody.GetComponent<PlayerMovement>().enabled = true;
+
+                    // // **Update Camera Target**
+                    // CameraMovement camScript = Camera.main.GetComponent<CameraMovement>();
+                    // if (camScript != null)
+                    // {
+                    //     camScript.PlayerCharacter = currentBody.transform; // Set the camera to follow the possessed object
+                    // }
+
                 }
             }
         }
     }
+
 }
 */
+
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class Possession : MonoBehaviour
+{
+    public Transform ghost;  // Assign in Inspector (for visibility control)
+    public GameObject startingPossession;  // Assign this in the Inspector to your armor object
+
+    private Sprite possessableSprite;
+    private GameObject possessedObject;
+    private bool isPossessing = false;
+
+    private void Start()
+    {
+        if (startingPossession != null)
+        {
+            Possess(startingPossession); // Start game possessing the armor
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (isPossessing)
+            {
+                Depossess();
+            }
+            else
+            {
+                Possess();
+            }
+        }
+
+        updatePosition();
+    }
+
+    private void updatePosition()
+    {
+        // Update the ghost's position to match the possessed object
+        if (possessedObject)
+            ghost.position = possessedObject.transform.position;
+    }
+
+    private void Possess(GameObject target = null)
+    {
+        if (target == null) // Normal possession logic
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+            foreach (var collider in colliders)
+            {
+                if (collider.CompareTag("Possessable") || collider.CompareTag("Armor"))
+                {
+                    target = collider.gameObject;
+                    break;
+                }
+            }
+        }
+
+        if (target != null)
+        {
+            possessedObject = target;
+            transform.position = possessedObject.transform.position;
+
+            // Hide ghost sprite and disable collider
+            gameObject.GetComponent<SpriteRenderer>().sprite = null;
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            gameObject.GetComponent<Animator>().enabled = false;
+
+            // Unfreeze movement
+            possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            possessedObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+            // Enable movement & animations
+            possessableSprite = possessedObject.GetComponent<SpriteRenderer>().sprite;
+            possessedObject.GetComponent<PossessedMovement>().disabled = false;
+            possessedObject.GetComponent<Animator>().enabled = true;
+
+            isPossessing = true;
+
+            // Switch camera to possessed object
+            CameraMovement cam = Camera.main.GetComponent<CameraMovement>();
+            if (cam != null)
+            {
+                cam.PlayerCharacter = possessedObject.transform;
+            }
+        }
+    }
+
+    private void Depossess()
+    {
+        if (possessedObject)
+        {
+            Vector2 exitPosition = (Vector2)possessedObject.transform.position + Vector2.left;
+            transform.position = exitPosition;
+
+            // Bring back the ghost
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
+            gameObject.GetComponent<Animator>().enabled = true;
+
+            //Prevent object movement
+            possessedObject.GetComponent<PossessedMovement>().disabled = true;
+            possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+
+            // Disable the possessed object's animation
+            possessedObject.GetComponent<SpriteRenderer>().sprite = possessableSprite;
+            possessedObject.GetComponent<Animator>().enabled = false;
+
+            //Reset possessed object
+            possessedObject = null;
+
+            // flip boolean
+            isPossessing = false;
+            CameraMovement cam = Camera.main.GetComponent<CameraMovement>();
+            if (cam != null)
+            {
+                cam.PlayerCharacter = transform; // Set the camera to follow the possessed object
+            }
+        }
+    }
+
+    // just to see the radius for possession
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawWireSphere(transform.position, 1f);  // Change 1f to match your OverlapCircle radius
+    // }
+
+}
