@@ -4,8 +4,8 @@ public class PressurePlate : MonoBehaviour
 {
     //public Animator plateAnimator;  // Reference to the pressure plate animator
     public GameObject targetObject; // The object to activate/deactivate
-    public Sprite pressedSprite; // The sprite to display when the plate is pressed
-    private Sprite unpressedSprite; // The sprite to display when the plate is not pressed
+    public Sprite inactive; // The sprite to display when the plate is not pressed
+    public Sprite active; // The sprite to display when the plate is pressed
     public float requiredMass = 10f; // Minimum mass required to activate the plate
     private float currentMass = 0f; // Tracks the total mass on the plate
 
@@ -49,8 +49,7 @@ public class PressurePlate : MonoBehaviour
         // {
         //     plateAnimator.SetBool("Pressed", true);
         // }
-        unpressedSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-        gameObject.GetComponent<SpriteRenderer>().sprite = pressedSprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = active;
 
         if (targetObject != null)
         {
@@ -64,7 +63,7 @@ public class PressurePlate : MonoBehaviour
         // {
         //     plateAnimator.SetBool("Pressed", false);
         // }
-        gameObject.GetComponent<SpriteRenderer>().sprite = unpressedSprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = inactive;
 
         if (targetObject != null)
         {
