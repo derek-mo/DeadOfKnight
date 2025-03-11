@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelIndex: 2
-  useGameSceneManager: 1
+  useGameSceneManager: 0
 --- !u!61 &162264902
 BoxCollider2D:
   m_ObjectHideFlags: 0
