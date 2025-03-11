@@ -213,7 +213,7 @@ MonoBehaviour:
   ShowDebugRaycast: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   rayLength: 1
   playerAudio: {fileID: 0}
 --- !u!114 &3766746771450096030
