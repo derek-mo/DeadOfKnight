@@ -7,17 +7,20 @@ TagManager:
   - GuardView
   - Cover
   - Possessable
+  - Pushable
+  - Phasable
+  - Armor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Pushable
+  - Phasable
+  - Armor
+  - Possessable
   - 
   - 
   - 
