@@ -59,11 +59,13 @@ public class Possession : MonoBehaviour
 
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Possession : MonoBehaviour
 {
     public Transform ghost;  // Assign in Inspector (for visibility control)
     public GameObject startingPossession;  // Assign this in the Inspector to your armor object
+    public GameObject popup;
 
     private Sprite possessableSprite;
     private GameObject possessedObject;
@@ -90,7 +92,7 @@ public class Possession : MonoBehaviour
                 Possess();
             }
         }
-
+        show_popup();
         updatePosition();
     }
 
@@ -184,5 +186,20 @@ public class Possession : MonoBehaviour
     //     Gizmos.color = Color.red;
     //     Gizmos.DrawWireSphere(transform.position, 1f);  // Change 1f to match your OverlapCircle radius
     // }
+
+    //Shows the possess prompt when player is close enough to possessable object
+    public void show_popup()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+        foreach (var collider in colliders)
+        {
+           if ((collider.CompareTag("Possessable") || collider.CompareTag("Armor")) && (!isPossessing))
+             {
+               popup.GetComponent<SpriteRenderer>().enabled = true;
+                return;
+             }
+           }
+        popup.GetComponent<SpriteRenderer>().enabled = false;
+    }
 
 }
