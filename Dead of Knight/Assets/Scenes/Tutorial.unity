@@ -15612,7 +15612,7 @@ SpriteRenderer:
   m_SortingLayerID: 1647182109
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1821420145, guid: 58b51a401c2fd784dad9deb6e941da7f, type: 3}
+  m_Sprite: {fileID: 46675943, guid: 64798d3b2798991468ac87e513fcb7dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15632,8 +15632,8 @@ Transform:
   m_GameObject: {fileID: 640830953}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.3, z: 1}
+  m_LocalPosition: {x: -4.95, y: -4.96, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -15697,18 +15697,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.014135376, y: -0.025914617}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 0.21914113, y: 0.26782924}
   m_EdgeRadius: 0
 --- !u!1 &758157263
 GameObject:
@@ -16306,6 +16306,8 @@ GameObject:
   - component: {fileID: 1014078916}
   - component: {fileID: 1014078917}
   - component: {fileID: 1014078918}
+  - component: {fileID: 1014078922}
+  - component: {fileID: 1014078921}
   - component: {fileID: 1014078919}
   - component: {fileID: 1014078920}
   m_Layer: 8
@@ -16485,7 +16487,6 @@ MonoBehaviour:
   Speed: 1
   Acceleration: 0.05
   DiagonalSpeedLimiter: 0.7
-  SpriteFacingRight: 1
   canJump: 0
   JumpForce: 10
   NumberOfJumps: 1
@@ -16495,7 +16496,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayLength: 1
-  playerAudio: {fileID: 0}
+  playerAudio: {fileID: 1014078922}
 --- !u!114 &1014078920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16513,6 +16514,51 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 119
   pushPoint: {fileID: 219410627}
+--- !u!114 &1014078921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014078911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e39f99dcd999946aaca275cc363bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UsePlayerAttackAnimations: 0
+  anim: {fileID: 0}
+  rb: {fileID: 0}
+  playerMoveScript: {fileID: 0}
+  weaponList: []
+  weapon: {fileID: 0}
+  coolDown: 0.4
+  playerAudio: {fileID: 1014078922}
+--- !u!114 &1014078922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014078911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b244460e5b75a24d88b4d2e99041fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WalkAudioClip: {fileID: 8300000, guid: 643aaeaff13574948b1db3aab47aad97, type: 3}
+  LoopWalkAudio: 1
+  AttackAudioClip: {fileID: 8300000, guid: 82b603aa4b391254791981fd0c648111, type: 3}
+  LoopAttackAudio: 0
+  DeathAudioClip: {fileID: 8300000, guid: 6f8d78e7475b3a24d89025aa830e191f, type: 3}
+  LoopDeathAudio: 0
+  JumpAudioClip: {fileID: 0}
+  LoopJumpAudio: 0
+  VolumeLevel: 1
+  WalkSource: {fileID: 0}
+  AttackSource: {fileID: 0}
+  DeathSource: {fileID: 0}
+  JumpSource: {fileID: 0}
 --- !u!1 &1246479343
 GameObject:
   m_ObjectHideFlags: 0
@@ -16658,12 +16704,12 @@ SpriteRenderer:
   m_SortingLayerID: 1647182109
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1217808474, guid: 1d4daf98b815b914a931e397c1b637ab, type: 3}
+  m_Sprite: {fileID: 759127337, guid: 64798d3b2798991468ac87e513fcb7dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -16679,7 +16725,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.02, y: -5.37, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 4.2, y: 4.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -16697,8 +16743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 457376402}
-  inactive: {fileID: -1217808474, guid: 1d4daf98b815b914a931e397c1b637ab, type: 3}
-  active: {fileID: -749605204, guid: 1d4daf98b815b914a931e397c1b637ab, type: 3}
+  inactive: {fileID: 759127337, guid: 64798d3b2798991468ac87e513fcb7dc, type: 3}
+  active: {fileID: -1394461798, guid: 64798d3b2798991468ac87e513fcb7dc, type: 3}
   requiredMass: 10
 --- !u!61 &1268256290
 BoxCollider2D:
@@ -16732,18 +16778,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003247857, y: -0.3507576}
+  m_Offset: {x: -0.0011058301, y: -0.107851185}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7336838, y: 0.2984848}
+  m_Size: {x: 0.22874442, y: 0.10498206}
   m_EdgeRadius: 0
 --- !u!95 &1268256291
 Animator:
@@ -18353,7 +18399,6 @@ MonoBehaviour:
   Speed: 5
   Acceleration: 0.05
   DiagonalSpeedLimiter: 0.7
-  SpriteFacingRight: 0
   canJump: 0
   JumpForce: 10
   NumberOfJumps: 1
@@ -18376,9 +18421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b244460e5b75a24d88b4d2e99041fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkAudioClip: {fileID: 8300000, guid: eeb84e46b7d39df4a8ed6f58820d71a2, type: 3}
+  WalkAudioClip: {fileID: 8300000, guid: d0e81c2a8645f0140946e2d7c69b69f9, type: 3}
   LoopWalkAudio: 1
-  AttackAudioClip: {fileID: 0}
+  AttackAudioClip: {fileID: 8300000, guid: c55f25a9278c7414dafdd7759cb1d385, type: 3}
   LoopAttackAudio: 0
   DeathAudioClip: {fileID: 0}
   LoopDeathAudio: 0
@@ -18459,6 +18504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghost: {fileID: 4154586219653849944}
   startingPossession: {fileID: 1014078911}
+  playerAudio: {fileID: 0}
 --- !u!1 &8712718803372154706
 GameObject:
   m_ObjectHideFlags: 0
