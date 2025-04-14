@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d4daf98b815b914a931e397c1b637ab
+guid: 64798d3b2798991468ac87e513fcb7dc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ba1f265f12da35428f66237b8bebf12
-      internalID: -1217808474
+      spriteID: 0388a7c2349b49749ae53c5af8bfd612
+      internalID: 759127337
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5982e8f2bf3c99a44818181a287f1941
-      internalID: -749605204
+      spriteID: 78b2497e48c70df468b99b5cb4a1bcc2
+      internalID: -1394461798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pressure plate sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a10c2a705ede3e418b2641ef1ac753a
+      internalID: 46675943
       vertices: []
       indices: 
       edges: []
@@ -162,8 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pressure plate sheet_0: -1217808474
-      pressure plate sheet_1: -749605204
+      pressure plate sheet_0: 759127337
+      pressure plate sheet_1: -1394461798
+      pressure plate sheet_2: 46675943
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
