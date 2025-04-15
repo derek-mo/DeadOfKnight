@@ -31,9 +31,16 @@ public class Bolt : MonoBehaviour
             else
                 rb.AddForce(transform.right * -10, ForceMode2D.Impulse);
         }
-        if (collision.gameObject.name == "Target")
+        else if (collision.gameObject.name == "Box")
         {
-            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.name == "Walls")
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.name == "Door")
+        {
             Destroy(gameObject);
         }
     }

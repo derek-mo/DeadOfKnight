@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class Ballista : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            Debug.Log("Pew");
             if (BallistaType == 1)
             {
                 newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
