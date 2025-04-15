@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
 	[Tooltip("(Only Matters in Top Down) Limits the speed when moving diagonally.")]
 	public float DiagonalSpeedLimiter = 0.7f;
 
-	[Tooltip("This means that you're 1D character is facing left by default (1D means you only face left or right)")]
-	public bool SpriteFacingRight = false;
+	//[Tooltip("This means that you're 1D character is facing left by default (1D means you only face left or right)")]
+	//public bool SpriteFacingRight = false;
 
 	//=========================================================================
 
@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
 		rb.velocity = new Vector3(Horizontal * Speed, Vertical * Speed); //Set velocity to move gameobject.
 
 
-		FlipCheck(Horizontal);
+		//FlipCheck(Horizontal);
 	}
 
 	private void MoveSideScroller(float move)
@@ -223,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
 		rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref currentVelocity, Acceleration); //Use smooth damp to simulate acceleration.
 
 		//If your sprite has an idle where they are facing to the side, then you may need to uncomment this :)
-		FlipCheck(move);
+		//FlipCheck(move);
 
 		if (!isGrounded) //if the player is in the air
 		{
@@ -254,26 +254,26 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	private void FlipCheck(float move)
-	{
-		//Flip the sprite so that they are facing the correct way when moving
-		if (move > 0 && !SpriteFacingRight) //if moving to the right and the sprite is not facing the right.
-		{
-			Flip();
-		}
-		else if (move < 0 && SpriteFacingRight) //if moving to the left and the sprite is facing right
-		{
-			Flip();
-		}
-	}
+	// private void FlipCheck(float move)
+	// {
+	// 	//Flip the sprite so that they are facing the correct way when moving
+	// 	if (move > 0 && !SpriteFacingRight) //if moving to the right and the sprite is not facing the right.
+	// 	{
+	// 		Flip();
+	// 	}
+	// 	else if (move < 0 && SpriteFacingRight) //if moving to the left and the sprite is facing right
+	// 	{
+	// 		Flip();
+	// 	}
+	// }
 
-	private void Flip()
-	{
-		SpriteFacingRight = !SpriteFacingRight; //flip whether the sprite is facing right
-		Vector3 currentScale = transform.localScale;
-		currentScale.x *= -1;
-		transform.localScale = currentScale;
-	}
+	// private void Flip()
+	// {
+	// 	SpriteFacingRight = !SpriteFacingRight; //flip whether the sprite is facing right
+	// 	Vector3 currentScale = transform.localScale;
+	// 	currentScale.x *= -1;
+	// 	transform.localScale = currentScale;
+	// }
 
 	public Vector2 GetLastLookDirection()
 	{

@@ -131,8 +131,9 @@ public class PlayerPush : MonoBehaviour
         //Debug.Log(hit.collider != null && hit.collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.E));    
         foreach (var collider in colliders)
         {
+
             if (collider != null && collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.LeftShift) && obj == null)
-            {
+           }
                 //Debug.Log("Found Pushable Item: " + hit.collider.gameObject.name);
                 obj = collider.gameObject;
 
@@ -162,6 +163,7 @@ public class PlayerPush : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Vector2 position = new Vector2(transform.position.x, transform.position.y - 0.25f);
+
         Gizmos.DrawWireSphere(position, 1f);
     }
 }

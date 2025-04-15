@@ -71,8 +71,12 @@ public class Possession : MonoBehaviour
     private GameObject possessedObject;
     private bool isPossessing = false;
 
+    [Header("Audio")]
+	public PlayerAudio playerAudio;
+
     private void Start()
     {
+        playerAudio = GetComponent<PlayerAudio>();
         if (startingPossession != null)
         {
             Possess(startingPossession); // Start game possessing the armor
@@ -83,6 +87,9 @@ public class Possession : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            if (playerAudio) {
+                playerAudio.AttackSource.Play();
+            }
             if (isPossessing)
             {
                 Depossess();
