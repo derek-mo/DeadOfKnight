@@ -59,11 +59,13 @@ public class Possession : MonoBehaviour
 
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Possession : MonoBehaviour
 {
     public Transform ghost;  // Assign in Inspector (for visibility control)
     public GameObject startingPossession;  // Assign this in the Inspector to your armor object
+    public GameObject popup;
 
     private Sprite possessableSprite;
     private GameObject possessedObject;
@@ -97,7 +99,7 @@ public class Possession : MonoBehaviour
                 Possess();
             }
         }
-
+        show_popup();
         updatePosition();
     }
 
@@ -133,14 +135,18 @@ public class Possession : MonoBehaviour
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             gameObject.GetComponent<Animator>().enabled = false;
 
-            // Unfreeze movement
-            possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            possessedObject.GetComponent<Rigidbody2D>().freezeRotation = true;
 
-            // Enable movement & animations
-            possessableSprite = possessedObject.GetComponent<SpriteRenderer>().sprite;
-            possessedObject.GetComponent<PossessedMovement>().disabled = false;
-            possessedObject.GetComponent<Animator>().enabled = true;
+            if (possessedObject.name == "Armor")
+            {
+                // Unfreeze movement
+                possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                possessedObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+                // Enable movement & animations
+                possessableSprite = possessedObject.GetComponent<SpriteRenderer>().sprite;
+                possessedObject.GetComponent<PossessedMovement>().disabled = false;
+                possessedObject.GetComponent<Animator>().enabled = true;
+            }
 
             isPossessing = true;
 
@@ -149,6 +155,12 @@ public class Possession : MonoBehaviour
             if (cam != null)
             {
                 cam.PlayerCharacter = possessedObject.transform;
+            }
+
+            // Turn on Ballista
+            if(possessedObject.name == "Ballista")
+            {
+                possessedObject.GetComponent<Ballista>().enabled = true;
             }
         }
     }
@@ -164,13 +176,23 @@ public class Possession : MonoBehaviour
             gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
             gameObject.GetComponent<Animator>().enabled = true;
 
-            //Prevent object movement
-            possessedObject.GetComponent<PossessedMovement>().disabled = true;
-            possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
-            // Disable the possessed object's animation
-            possessedObject.GetComponent<SpriteRenderer>().sprite = possessableSprite;
-            possessedObject.GetComponent<Animator>().enabled = false;
+            if (possessedObject.name == "Armor")
+            {
+                //Prevent object movement
+                possessedObject.GetComponent<PossessedMovement>().disabled = true;
+                possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+
+                // Disable the possessed object's animation
+                possessedObject.GetComponent<SpriteRenderer>().sprite = possessableSprite;
+                possessedObject.GetComponent<Animator>().enabled = false;
+            }
+
+            // Turn on Ballista
+            if (possessedObject.name == "Ballista")
+            {
+                possessedObject.GetComponent<Ballista>().enabled = false;
+            }
 
             //Reset possessed object
             possessedObject = null;
@@ -191,5 +213,20 @@ public class Possession : MonoBehaviour
     //     Gizmos.color = Color.red;
     //     Gizmos.DrawWireSphere(transform.position, 1f);  // Change 1f to match your OverlapCircle radius
     // }
+
+    //Shows the possess prompt when player is close enough to possessable object
+    public void show_popup()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+        foreach (var collider in colliders)
+        {
+           if ((collider.CompareTag("Possessable") || collider.CompareTag("Armor")) && (!isPossessing))
+             {
+               popup.GetComponent<SpriteRenderer>().enabled = true;
+                return;
+             }
+           }
+        popup.GetComponent<SpriteRenderer>().enabled = false;
+    }
 
 }
