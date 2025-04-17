@@ -133,7 +133,7 @@ public class PlayerPush : MonoBehaviour
         {
 
             if (collider != null && collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.LeftShift) && obj == null)
-           }
+            {
                 //Debug.Log("Found Pushable Item: " + hit.collider.gameObject.name);
                 obj = collider.gameObject;
 
