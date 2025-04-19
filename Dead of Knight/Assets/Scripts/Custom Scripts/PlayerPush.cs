@@ -26,7 +26,7 @@ public class PlayerPush : MonoBehaviour
         foreach (var collider in colliders)
         {
 
-            if (collider != null && collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.LeftShift) && obj == null)
+            if (collider != null && collider.gameObject.CompareTag("Pushable") && Input.GetKey(KeyCode.Space) && obj == null)
             {
                 //Debug.Log("Found Pushable Item: " + hit.collider.gameObject.name);
                 obj = collider.gameObject;
@@ -38,7 +38,7 @@ public class PlayerPush : MonoBehaviour
                 obj.transform.SetParent(transform);
 
             }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            else if (Input.GetKeyUp(KeyCode.Space))
             {
                 obj.transform.SetParent(null);
                 obj = null;
