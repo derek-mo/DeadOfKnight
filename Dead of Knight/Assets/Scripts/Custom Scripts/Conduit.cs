@@ -26,8 +26,8 @@ public class Conduit : MonoBehaviour
             }
         }
         
-        // Check if the player is within interaction distance and presses "E"
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        // Check if the player is within interaction distance and presses "Space"
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.Space))
         {
             ActivateConduit();
         }

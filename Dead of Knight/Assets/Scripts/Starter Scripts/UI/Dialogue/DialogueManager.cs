@@ -85,15 +85,15 @@ public class DialogueManager : MonoBehaviour
 		speaker.sprite = invisSprite;
 	}
 
-	private void FreezePlayer()
-	{
-		gameManager.DisablePlayerMovement(true); //Stops player from moving
-	}
+	// private void FreezePlayer()
+	// {
+	// 	gameManager.DisablePlayerMovement(true); //Stops player from moving
+	// }
 
-	private void UnFreezePlayer()
-	{
-		gameManager.DisablePlayerMovement(false); //Allows player to move again
-	}
+	// private void UnFreezePlayer()
+	// {
+	// 	gameManager.DisablePlayerMovement(false); //Allows player to move again
+	// }
 
 	public void StartDialogue(Queue<string> dialogue)
 	{
@@ -103,7 +103,7 @@ public class DialogueManager : MonoBehaviour
 		continueImage.SetActive(false);
 		if (freezePlayerOnDialogue)
 		{
-			FreezePlayer();
+			//FreezePlayer();
 		}
 
 
@@ -223,7 +223,7 @@ public class DialogueManager : MonoBehaviour
 		// isOpen = false;
 		if (freezePlayerOnDialogue)
 		{
-			UnFreezePlayer();
+			//UnFreezePlayer();
 		}
 		if (levelBool)
 		{

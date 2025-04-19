@@ -7,12 +7,13 @@ public class Ballista : MonoBehaviour
 {
     public GameObject bullet;
     public int BallistaType;
+    private Animator animator;
     //1 for up, 2 for right, 3 for down, 4 for left
     // Start is called before the first frame update
 
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,6 +26,7 @@ public class Ballista : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            animator.SetTrigger("Fire");
             GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             Debug.Log("Pew");
             if (BallistaType == 1)

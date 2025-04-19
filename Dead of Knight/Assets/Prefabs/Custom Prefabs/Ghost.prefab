@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3577006570853278465}
   - component: {fileID: 345576408226141226}
   - component: {fileID: 2198356310309954320}
-  - component: {fileID: 7822350900204894541}
+  - component: {fileID: 4222185016775929675}
   - component: {fileID: 8407550022775257173}
   - component: {fileID: 4781603164050309801}
   - component: {fileID: 8853536867167699393}
@@ -174,7 +174,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7822350900204894541
+--- !u!114 &4222185016775929675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,25 +183,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3183580646465594436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f30cb23d9368b4c989ac297997664e, type: 3}
+  m_Script: {fileID: 11500000, guid: 73decfa7808c81e43a65c98ca629769b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TopDownMovement: 1
-  disabled: 0
-  Speed: 5
-  Acceleration: 0.05
-  DiagonalSpeedLimiter: 0.7
-  SpriteFacingRight: 0
-  canJump: 0
-  JumpForce: 10
-  NumberOfJumps: 1
-  FallMultiplier: 3
-  ShowDebugRaycast: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  rayLength: 1
-  playerAudio: {fileID: 0}
+  moveSpeed: 5
 --- !u!114 &8407550022775257173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,8 +242,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3183580646465594436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 328aedca708b9424d91534c646aef313, type: 3}
+  m_Script: {fileID: 11500000, guid: 77f8e68ab17a75d40bfc554050659b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 3158423324025888971}
+  ghost: {fileID: 0}
   startingPossession: {fileID: 0}
+  popup: {fileID: 0}
+  playerAudio: {fileID: 0}

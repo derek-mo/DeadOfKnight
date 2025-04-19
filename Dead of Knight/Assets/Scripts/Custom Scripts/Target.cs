@@ -20,12 +20,14 @@ public class Target : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hit");
-        if (targetObject != null)
-        {
-            targetObject.SetActive(false); // Make the object disappear/open
+        if (collision.CompareTag("Projectile")) {
+            Debug.Log("hit");
+            if (targetObject != null)
+            {
+                targetObject.SetActive(false); // Make the object disappear/open
+            }
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
     }
 }
