@@ -243,7 +243,7 @@ public class PlayerHealth : MonoBehaviour
 		if (gameManager != null && gameSceneManager != null)
 		{
 			anim.SetBool("isDead", true);
-			gameManager.DisablePlayerMovement(true);
+			//gameManager.DisablePlayerMovement(true);
 			if (playerAudio && !playerAudio.DeathSource.isPlaying && playerAudio.DeathSource.clip != null)
 			{
 				playerAudio.DeathSource.Play();
@@ -256,7 +256,7 @@ public class PlayerHealth : MonoBehaviour
 			StartCoroutine(gameSceneManager.FadeIn());
 			yield return new WaitForSeconds(1f);
 			ResetHealth();
-			gameManager.DisablePlayerMovement(false);
+			//gameManager.DisablePlayerMovement(false);
 			anim.SetBool("isDead", false);
 		}
 		else

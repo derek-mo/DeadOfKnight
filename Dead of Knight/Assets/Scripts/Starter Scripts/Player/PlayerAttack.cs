@@ -79,14 +79,14 @@ public class PlayerAttack : MonoBehaviour
 			if (UsePlayerAttackAnimations)
             {
 				Debug.Log("using player attack animation");
-				playerMoveScript.TriggerPlayerAttackAnimation();
+				//playerMoveScript.TriggerPlayerAttackAnimation();
 
 			}
 
-			if (weapon is ProjectileWeapon)
-				weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection(), rb.velocity);
-			else
-				weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection());
+			// if (weapon is ProjectileWeapon)
+			// 	//weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection(), rb.velocity);
+			// else
+			// 	//weapon.WeaponStart(this.transform, playerMoveScript.GetLastLookDirection());
 
 			StartCoroutine(CoolDown());
 		}
