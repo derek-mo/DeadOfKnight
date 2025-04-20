@@ -36,7 +36,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8260716542240605297}
-  - {fileID: 690768672290510205}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5424245258156144889
@@ -186,22 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d1532442dbce94b91b3de7c35cdc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TopDownMovement: 1
-  disabled: 1
-  Speed: 1
-  Acceleration: 0.05
-  DiagonalSpeedLimiter: 0.7
-  SpriteFacingRight: 1
-  canJump: 0
-  JumpForce: 10
-  NumberOfJumps: 1
-  FallMultiplier: 3
-  ShowDebugRaycast: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  rayLength: 1
-  playerAudio: {fileID: 0}
+  moveSpeed: 5
 --- !u!114 &8273282117850903893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,38 +203,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 119
   pushPoint: {fileID: 8260716542240605297}
-  raycastPoint: {fileID: 690768672290510205}
---- !u!1 &6589508813424396172
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 690768672290510205}
-  m_Layer: 8
-  m_Name: Raycast Position
-  m_TagString: Player
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &690768672290510205
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6589508813424396172}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.079, y: -0.076, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6179284876904050036}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7688893448150547885
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,14 +31,14 @@ public class GameManager : MonoBehaviour
 		RespawnPlace = newPlace.transform.position;
 	}
 
-	public void DisablePlayerMovement(bool isDisabled)
-	{
-		PlayerMovement playerMovement = Player.GetComponent<PlayerMovement>();
-		PlayerAudio playerAudio = Player.GetComponent<PlayerAudio>();
+	// public void DisablePlayerMovement(bool isDisabled)
+	// {
+	// 	PlayerMovement playerMovement = Player.GetComponent<PlayerMovement>();
+	// 	PlayerAudio playerAudio = Player.GetComponent<PlayerAudio>();
 
-		if (playerMovement)
-			playerMovement.DisablePlayer(isDisabled);
-		if (playerAudio)
-			playerAudio.StopAll();
-	}
+	// 	if (playerMovement)
+	// 		playerMovement.DisablePlayer(isDisabled);
+	// 	if (playerAudio)
+	// 		playerAudio.StopAll();
+	// }
 }
