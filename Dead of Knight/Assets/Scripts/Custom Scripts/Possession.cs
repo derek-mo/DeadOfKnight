@@ -10,10 +10,15 @@ public class Possession : MonoBehaviour
 
     private Sprite possessableSprite;
     private GameObject possessedObject;
-    private bool isPossessing = false;
+    public static bool isPossessing = false;
 
     [Header("Audio")]
 	public PlayerAudio playerAudio;
+
+    private Sprite armorUp;
+    private Sprite armorDown;
+    private Sprite armorLeft;
+    private Sprite armorRight;
 
     private void Start()
     {
@@ -41,15 +46,15 @@ public class Possession : MonoBehaviour
             }
         }
         show_popup();
-        updatePosition();
+        //updatePosition();
     }
 
-    private void updatePosition()
-    {
-        // Update the ghost's position to match the possessed object
-        if (possessedObject)
-            ghost.position = possessedObject.transform.position;
-    }
+    // private void updatePosition()
+    // {
+    //     // Update the ghost's position to match the possessed object
+    //     if (possessedObject)
+    //         ghost.position = possessedObject.transform.position;
+    // }
 
     private void Possess(GameObject target = null)
     {
@@ -127,6 +132,19 @@ public class Possession : MonoBehaviour
                 // Disable the possessed object's animation
                 possessedObject.GetComponent<SpriteRenderer>().sprite = possessableSprite;
                 possessedObject.GetComponent<Animator>().enabled = false;
+
+                // var sr = possessedObject.GetComponent<SpriteRenderer>();
+                // var pm = possessedObject.GetComponent<PossessedMovement>();
+                // Vector2 dir = pm.LastMovement;
+                // if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+                // {
+                //     sr.sprite = dir.x > 0 ? armorRight : armorLeft;
+                // }
+                // else
+                // {
+                //     sr.sprite = dir.y > 0 ? armorUp : armorDown;
+                // }
+
             }
 
             // Turn on Ballista

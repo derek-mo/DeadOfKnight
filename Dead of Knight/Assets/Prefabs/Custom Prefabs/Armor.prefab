@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2638838253566296677}
   - component: {fileID: 1399213780756859571}
   - component: {fileID: 8273282117850903893}
+  - component: {fileID: 5911029291334522441}
   m_Layer: 8
   m_Name: Armor
   m_TagString: Armor
@@ -186,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerInput: {fileID: -944628639613478452, guid: 0c9a1496b58bc5d4f96d12c2a92a347a, type: 3}
 --- !u!114 &8273282117850903893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +205,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 119
   pushPoint: {fileID: 8260716542240605297}
+  popup: {fileID: 0}
+--- !u!114 &5911029291334522441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649929272623864529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7d11180ceabbb4aa81aedc93be9019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 21300000, guid: d9cf5103e63fe02418614ffe08ad6943, type: 3}
+  down: {fileID: 21300000, guid: d99752baefb63dd4a89aebfdc78bd048, type: 3}
+  left: {fileID: 21300000, guid: 26378251d903de746876df8138cc6b99, type: 3}
+  right: {fileID: 21300000, guid: e0a89048234db9a4596bfd4e38901398, type: 3}
 --- !u!1 &7688893448150547885
 GameObject:
   m_ObjectHideFlags: 0

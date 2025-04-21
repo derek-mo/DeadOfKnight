@@ -16,6 +16,7 @@ public class PossessedMovement : MonoBehaviour {
     private const string xInput = "xInput";
     private const string yInput = "yInput";
     private InputAction input;
+    public Vector2 LastMovement { get; private set; }
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +31,7 @@ public class PossessedMovement : MonoBehaviour {
         animator.SetFloat(vertical, movement.y);
 
         if (movement != Vector2.zero) {
+            LastMovement = movement.normalized;
             animator.SetFloat(xInput, movement.x);
             animator.SetFloat(yInput, movement.y);
         }
