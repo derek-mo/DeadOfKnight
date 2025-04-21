@@ -13,7 +13,8 @@ public class Conduit : MonoBehaviour
 
     void Update()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.7f);
+        Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.7f);
         foreach (var collider in colliders)
         {
             if (collider.CompareTag("Player"))
@@ -27,8 +28,8 @@ public class Conduit : MonoBehaviour
             }
         }
 
-        // Check if the player is within interaction distance and presses "E"
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        // Check if the player is within interaction distance and presses "Space"
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.Space))
         {
             ActivateConduit();
         }
@@ -77,6 +78,7 @@ public class Conduit : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 0.7f);  // Change 1f to match your OverlapCircle radius
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
+        Gizmos.DrawWireSphere(position, 0.7f);  // Change 1f to match your OverlapCircle radius
     }
 }

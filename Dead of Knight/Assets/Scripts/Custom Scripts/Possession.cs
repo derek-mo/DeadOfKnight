@@ -1,62 +1,3 @@
-/*using UnityEngine;
-
-public class Possession : MonoBehaviour
-{
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        possess();
-    }
-
-    void possess()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameObject[] possessables = GameObject.FindGameObjectsWithTag("Possessable");
-
-            foreach (GameObject possessObject in possessables)
-            {
-                if ((transform.position - possessObject.transform.position).magnitude <= 2)
-                {
-                    Debug.Log("Possessing: " + possessObject.name);
-
-                    // // Hide the ghost
-                    // spriteRenderer.enabled = false;
-
-                    // // Transfer control
-                    // currentBody = possessObject;
-                    // currentBody.tag = "Player";
-                    // if (currentBody.name == "dummy") {
-                    //     animator = currentBody.GetComponent<Animator>();
-                    //     animator.SetTrigger("Possessing");
-                    // }
-
-                    // if (newSprite != null) {
-                    //     spriteRenderer = currentBody.GetComponent<SpriteRenderer>();
-                    //     spriteRenderer.sprite = newSprite;
-                    // }   
-                    // currentBody.GetComponent<Possessable>().enabled = true;
-                    // currentBody.GetComponent<PlayerMovement>().enabled = true;
-
-                    // // **Update Camera Target**
-                    // CameraMovement camScript = Camera.main.GetComponent<CameraMovement>();
-                    // if (camScript != null)
-                    // {
-                    //     camScript.PlayerCharacter = currentBody.transform; // Set the camera to follow the possessed object
-                    // }
-
-                }
-            }
-        }
-    }
-
-}
-*/
-
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -71,8 +12,12 @@ public class Possession : MonoBehaviour
     private GameObject possessedObject;
     private bool isPossessing = false;
 
+    [Header("Audio")]
+	public PlayerAudio playerAudio;
+
     private void Start()
     {
+        playerAudio = GetComponent<PlayerAudio>();
         if (startingPossession != null)
         {
             Possess(startingPossession); // Start game possessing the armor
@@ -83,6 +28,9 @@ public class Possession : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            if (playerAudio) {
+                playerAudio.AttackSource.Play();
+            }
             if (isPossessing)
             {
                 Depossess();
@@ -137,7 +85,7 @@ public class Possession : MonoBehaviour
 
                 // Enable movement & animations
                 possessableSprite = possessedObject.GetComponent<SpriteRenderer>().sprite;
-                possessedObject.GetComponent<PossessedMovement>().disabled = false;
+                possessedObject.GetComponent<PossessedMovement>().enabled = true;
                 possessedObject.GetComponent<Animator>().enabled = true;
             }
 
@@ -162,7 +110,7 @@ public class Possession : MonoBehaviour
     {
         if (possessedObject)
         {
-            Vector2 exitPosition = (Vector2)possessedObject.transform.position + Vector2.left;
+            Vector2 exitPosition = (Vector2)possessedObject.transform.position;
             transform.position = exitPosition;
 
             // Bring back the ghost
@@ -173,7 +121,7 @@ public class Possession : MonoBehaviour
             if (possessedObject.name == "Armor")
             {
                 //Prevent object movement
-                possessedObject.GetComponent<PossessedMovement>().disabled = true;
+                possessedObject.GetComponent<PossessedMovement>().enabled = false;
                 possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
                 // Disable the possessed object's animation
@@ -201,11 +149,11 @@ public class Possession : MonoBehaviour
     }
 
     // just to see the radius for possession
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireSphere(transform.position, 1f);  // Change 1f to match your OverlapCircle radius
-    // }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1f);  // Change 1f to match your OverlapCircle radius
+    }
 
     //Shows the possess prompt when player is close enough to possessable object
     public void show_popup()
