@@ -38,11 +38,9 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pausing the game.");
-        // Time.timeScale = 0;
+        Time.timeScale = 0;
         pausePanel.SetActive(true);
         isPaused = true;
-        Debug.Log("Game paused.");
     }
 
     public void ResumeGame()
@@ -54,8 +52,6 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void OnPauseMenuButtonClick()
     {
-        Debug.Log("Pause clicked");
         SceneManager.LoadScene(0);
-        Debug.Log("Scene load request made");
     }
 }
