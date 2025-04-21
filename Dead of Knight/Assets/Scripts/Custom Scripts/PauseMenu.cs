@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))  // 0 is for left mouse button
+        {
+            Debug.Log("Mouse click detected at position at " + Input.mousePosition);
+        }
+   
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (isPaused)
@@ -31,9 +38,11 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void PauseGame()
     {
-        Time.timeScale = 0;
+        Debug.Log("Pausing the game.");
+        // Time.timeScale = 0;
         pausePanel.SetActive(true);
         isPaused = true;
+        Debug.Log("Game paused.");
     }
 
     public void ResumeGame()
@@ -41,5 +50,12 @@ public class NewBehaviourScript : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         isPaused = false;
+    }
+
+    public void OnPauseMenuButtonClick()
+    {
+        Debug.Log("Pause clicked");
+        SceneManager.LoadScene(0);
+        Debug.Log("Scene load request made");
     }
 }
