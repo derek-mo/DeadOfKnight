@@ -8,6 +8,15 @@ public class PressurePlate : MonoBehaviour
     public Sprite active; // The sprite to display when the plate is pressed
     public float requiredMass = 10f; // Minimum mass required to activate the plate
     private float currentMass = 0f; // Tracks the total mass on the plate
+    public bool startOpen;
+
+    void Start()
+    {
+        if (startOpen)
+        {
+            targetObject.SetActive(false);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -53,7 +62,14 @@ public class PressurePlate : MonoBehaviour
 
         if (targetObject != null)
         {
-            targetObject.SetActive(false); // Make the object disappear/open
+            if (!startOpen)
+            {
+                targetObject.SetActive(false); // Make the object disappear/open
+            }
+            else
+            {
+                targetObject.SetActive(true);
+            }
         }
     }
 
@@ -67,7 +83,13 @@ public class PressurePlate : MonoBehaviour
 
         if (targetObject != null)
         {
-            targetObject.SetActive(true); // Restore the object when weight is removed
+            if (!startOpen)
+            {
+                targetObject.SetActive(true); // Restore the object when weight is removed
+            } else
+            {
+                targetObject.SetActive(false);
+            }
         }
     }
 }

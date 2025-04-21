@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Conduit : MonoBehaviour
@@ -8,6 +9,7 @@ public class Conduit : MonoBehaviour
     public Transform player;  // Reference to the player
     private bool isPlayerNear = false; // Flag to check if the player is near
     private bool isObjectActive = true; // Track whether the object is active or not
+    public GameObject popup;
 
     void Update()
     {
@@ -25,12 +27,23 @@ public class Conduit : MonoBehaviour
                 isPlayerNear = false;
             }
         }
-        
+
         // Check if the player is within interaction distance and presses "Space"
         if (isPlayerNear && Input.GetKeyDown(KeyCode.Space))
         {
             ActivateConduit();
         }
+
+        if (isPlayerNear)
+        {
+            popup.GetComponent<SpriteRenderer>().enabled = true;
+            return;
+        }
+        else
+        {
+            popup.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        
     }
 
     // Method to activate the conduit and trigger the target object's action

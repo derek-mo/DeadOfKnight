@@ -7,6 +7,7 @@ public class PlayerPush : MonoBehaviour
     public float rayDistance = 1f;
     public LayerMask objMask;
     public Transform pushPoint;
+    public GameObject popup;
     //public Transform raycastPoint;
 
     private GameObject obj;
@@ -59,6 +60,18 @@ public class PlayerPush : MonoBehaviour
         Vector2 position = new Vector2(transform.position.x, transform.position.y - 0.25f);
 
         Gizmos.DrawWireSphere(position, 1f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Pushable")){
+            popup.GetComponent<Renderer>().enabled = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        popup.GetComponent<Renderer>().enabled = false;
     }
 }
 
