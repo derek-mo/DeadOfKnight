@@ -9,4 +9,10 @@ public class LoadSceneOnClick : MonoBehaviour {
     {
         SceneManager.LoadScene(sceneIndex);
     }
+
+    public void ResetScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
