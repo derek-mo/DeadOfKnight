@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class PossessedMovement : MonoBehaviour {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private InputActionAsset playerInput;
+	public PlayerAudio playerAudio;
+
 
     private Vector2 movement;
     private Rigidbody2D rb;
@@ -34,6 +36,20 @@ public class PossessedMovement : MonoBehaviour {
             LastMovement = movement.normalized;
             animator.SetFloat(xInput, movement.x);
             animator.SetFloat(yInput, movement.y);
+        }
+
+        //Debug.Log("Movement: " + (movement != Vector2.zero));
+        if (movement != Vector2.zero) {
+            // start the loop if not already playing
+            if (!playerAudio.WalkSource.isPlaying) {
+                playerAudio.WalkSource.Play();
+            }
+        }
+        else {
+            // stop when you halt
+            if (playerAudio.WalkSource.isPlaying) {
+                playerAudio.WalkSource.Stop();
+            }
         }
 
         if (PauseMenu.isPaused) {

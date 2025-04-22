@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2861187585386248012}
   - component: {fileID: 2638838253566296677}
   - component: {fileID: 1399213780756859571}
+  - component: {fileID: 452678966464984390}
   - component: {fileID: 8273282117850903893}
   - component: {fileID: 5911029291334522441}
   m_Layer: 8
@@ -77,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 634388441
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: 1647182109
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d99752baefb63dd4a89aebfdc78bd048, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -186,8 +187,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d1532442dbce94b91b3de7c35cdc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   playerInput: {fileID: -944628639613478452, guid: 0c9a1496b58bc5d4f96d12c2a92a347a, type: 3}
+  playerAudio: {fileID: 452678966464984390}
+--- !u!114 &452678966464984390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649929272623864529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b244460e5b75a24d88b4d2e99041fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WalkAudioClip: {fileID: 8300000, guid: 643aaeaff13574948b1db3aab47aad97, type: 3}
+  LoopWalkAudio: 1
+  AttackAudioClip: {fileID: 0}
+  LoopAttackAudio: 0
+  DeathAudioClip: {fileID: 0}
+  LoopDeathAudio: 0
+  JumpAudioClip: {fileID: 0}
+  LoopJumpAudio: 0
+  VolumeLevel: 1
+  WalkSource: {fileID: 0}
+  AttackSource: {fileID: 0}
+  DeathSource: {fileID: 0}
+  JumpSource: {fileID: 0}
 --- !u!114 &8273282117850903893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,11 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766af4a2439e9ab46b72b301d8340831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 1.5
+  rayDistance: 1
   objMask:
     serializedVersion: 2
     m_Bits: 119
-  pushPoint: {fileID: 8260716542240605297}
+  pushOffset: 1
   popup: {fileID: 0}
 --- !u!114 &5911029291334522441
 MonoBehaviour:
