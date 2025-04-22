@@ -38,6 +38,9 @@ public class Bolt : MonoBehaviour
         }
         else if (collision.gameObject.name == "Box")
         {
+            collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            Vector2 direction = (collision.gameObject.transform.position - this.transform.position).normalized;
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * 5, ForceMode2D.Impulse);
             Destroy(gameObject);
         }
         else if (collision.gameObject.name == "Walls")
