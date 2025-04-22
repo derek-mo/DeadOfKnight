@@ -58,8 +58,8 @@ public class PlayerAudio : MonoBehaviour
 		JumpSource.clip = JumpAudioClip;
 
 		//And here is just where we assign the global volume level, you can make these individualized if you want
-		WalkSource.volume = VolumeLevel;
-		AttackSource.volume = VolumeLevel;
+		WalkSource.volume = 0.8f;
+		AttackSource.volume = 0.2f;
 		DeathSource.volume = VolumeLevel;
 		JumpSource.volume = VolumeLevel;
 

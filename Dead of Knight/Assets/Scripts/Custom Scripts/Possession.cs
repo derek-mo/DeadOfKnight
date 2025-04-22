@@ -10,14 +10,13 @@ public class Possession : MonoBehaviour
 
     private Sprite possessableSprite;
     private GameObject possessedObject;
-    private bool isPossessing = false;
+    public static bool isPossessing = false;
 
     [Header("Audio")]
 	public PlayerAudio playerAudio;
 
     private void Start()
     {
-        playerAudio = GetComponent<PlayerAudio>();
         if (startingPossession != null)
         {
             Possess(startingPossession); // Start game possessing the armor
@@ -41,15 +40,17 @@ public class Possession : MonoBehaviour
             }
         }
         show_popup();
-        updatePosition();
+
+        //Debug.Log("Is Possessing: " + isPossessing);
+        //updatePosition();
     }
 
-    private void updatePosition()
-    {
-        // Update the ghost's position to match the possessed object
-        if (possessedObject)
-            ghost.position = possessedObject.transform.position;
-    }
+    // private void updatePosition()
+    // {
+    //     // Update the ghost's position to match the possessed object
+    //     if (possessedObject)
+    //         ghost.position = possessedObject.transform.position;
+    // }
 
     private void Possess(GameObject target = null)
     {
@@ -75,7 +76,13 @@ public class Possession : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = null;
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             gameObject.GetComponent<Animator>().enabled = false;
-
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            // if (playerAudio) {
+            //     if (playerAudio.WalkSource.isPlaying) {
+            //         playerAudio.WalkSource.Stop();
+            //     }
+            // }
+            //gameObject.GetComponent<PlayerAudio>().WalkSource.Stop();
 
             if (possessedObject.name == "Armor")
             {
@@ -86,6 +93,7 @@ public class Possession : MonoBehaviour
                 // Enable movement & animations
                 possessableSprite = possessedObject.GetComponent<SpriteRenderer>().sprite;
                 possessedObject.GetComponent<PossessedMovement>().enabled = true;
+                //possessedObject.GetComponent<PlayerPush>().enabled = true;
                 possessedObject.GetComponent<Animator>().enabled = true;
             }
 
@@ -116,17 +124,38 @@ public class Possession : MonoBehaviour
             // Bring back the ghost
             gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
             gameObject.GetComponent<Animator>().enabled = true;
+            gameObject.GetComponent<PlayerMovement>().enabled = true;
 
 
             if (possessedObject.name == "Armor")
             {
                 //Prevent object movement
                 possessedObject.GetComponent<PossessedMovement>().enabled = false;
+                //possessedObject.GetComponent<PlayerPush>().enabled = false;
                 possessedObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
                 // Disable the possessed object's animation
                 possessedObject.GetComponent<SpriteRenderer>().sprite = possessableSprite;
                 possessedObject.GetComponent<Animator>().enabled = false;
+                if (possessedObject.GetComponent<PlayerAudio>()) {
+                    if (possessedObject.GetComponent<PlayerAudio>().WalkSource.isPlaying) {
+                        possessedObject.GetComponent<PlayerAudio>().WalkSource.Stop();
+                    }
+                }
+                //possessedObject.GetComponent<PlayerAudio>().WalkSource.Stop();
+
+                // var sr = possessedObject.GetComponent<SpriteRenderer>();
+                // var pm = possessedObject.GetComponent<PossessedMovement>();
+                // Vector2 dir = pm.LastMovement;
+                // if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+                // {
+                //     sr.sprite = dir.x > 0 ? armorRight : armorLeft;
+                // }
+                // else
+                // {
+                //     sr.sprite = dir.y > 0 ? armorUp : armorDown;
+                // }
+
             }
 
             // Turn on Ballista
@@ -164,9 +193,9 @@ public class Possession : MonoBehaviour
            if ((collider.CompareTag("Possessable") || collider.CompareTag("Armor")) && (!isPossessing))
              {
                popup.GetComponent<SpriteRenderer>().enabled = true;
-                return;
+               return;
              }
-           }
+        }
         popup.GetComponent<SpriteRenderer>().enabled = false;
     }
 

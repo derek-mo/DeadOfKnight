@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerInput: {fileID: -944628639613478452, guid: 0c9a1496b58bc5d4f96d12c2a92a347a, type: 3}
+  playerAudio: {fileID: 4781603164050309801}
 --- !u!114 &8407550022775257173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,9 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b244460e5b75a24d88b4d2e99041fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkAudioClip: {fileID: 8300000, guid: eeb84e46b7d39df4a8ed6f58820d71a2, type: 3}
+  WalkAudioClip: {fileID: 8300000, guid: 6cf0734b74f94744c975f503b666f3a0, type: 3}
   LoopWalkAudio: 1
-  AttackAudioClip: {fileID: 0}
+  AttackAudioClip: {fileID: 8300000, guid: c55f25a9278c7414dafdd7759cb1d385, type: 3}
   LoopAttackAudio: 0
   DeathAudioClip: {fileID: 0}
   LoopDeathAudio: 0
@@ -245,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f8e68ab17a75d40bfc554050659b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 0}
+  ghost: {fileID: 3158423324025888971}
   startingPossession: {fileID: 0}
   popup: {fileID: 0}
-  playerAudio: {fileID: 0}
+  playerAudio: {fileID: 4781603164050309801}

@@ -25,11 +25,16 @@ public class Bolt : MonoBehaviour
         Debug.Log("Collided");
         if (collision.gameObject.name == "Armor")
         {
-            rb.velocity = Vector3.zero;
-            if (collision.gameObject.transform.localScale.x > 0)
-                rb.AddForce(transform.right * 10, ForceMode2D.Impulse);
-            else
-                rb.AddForce(transform.right * -10, ForceMode2D.Impulse);
+            // rb.velocity = Vector3.zero;
+            // if (collision.gameObject.transform.localScale.x > 0)
+            //     rb.AddForce(transform.right * 10, ForceMode2D.Impulse);
+            // else
+            //     rb.AddForce(transform.right * -10, ForceMode2D.Impulse);
+            var pm = collision.GetComponent<PossessedMovement>();
+            Vector2 deflectDir = pm.LastMovement;
+
+            rb.velocity = Vector2.zero;
+            rb.AddForce(deflectDir * 10, ForceMode2D.Impulse);
         }
         else if (collision.gameObject.name == "Box")
         {

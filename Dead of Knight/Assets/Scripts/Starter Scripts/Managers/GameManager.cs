@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		Cursor.visible = false;
+		PauseMenu.isPaused = false;
+		Time.timeScale = 1f;
 		if (Player == null)
 		{
 			Player = FindObjectOfType<PlayerMovement>().gameObject;
