@@ -14,17 +14,9 @@ public class Box : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Untagged")
+        if (!rb.IsSleeping())
         {
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Vector2 direction = -(collision.gameObject.transform.position - this.transform.position).normalized;
-            rb.AddForce(direction * 5, ForceMode2D.Impulse);
-            Invoke("Freeze", 1f);
+            Invoke(nameof(Freeze), 1f);
         }
     }
 
